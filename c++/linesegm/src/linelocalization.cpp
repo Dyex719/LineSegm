@@ -76,9 +76,10 @@ inline vector<int> localize (Mat& input) {
 	vector<int> lines;
 	int dist, valley;
 	for (unsigned int i = 0; i < peaks.size() - 1; i++) {
-		dist = (peaks[i + 1] - peaks[i]) / 2;
-		valley = peaks[i] + dist;
-		lines.push_back(valley);
+		// dist = (peaks[i + 1] - peaks[i]) / 2;
+		// valley = peaks[i] + dist;
+		// lines.push_back(valley);
+		lines.push_back(peaks[i]);
 	}
 
 	return lines;

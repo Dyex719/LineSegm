@@ -13,9 +13,10 @@ def localize(im):
     # compute the valley bewteen each pair of consecutive peaks
     indexes = []
     for i in range(0, len(peaks)-1):
-        dist = (peaks[i+1] - peaks[i]) / 2
-        valley = peaks[i] + dist
-        indexes.append(valley)
+        # dist = (peaks[i+1] - peaks[i]) / 2
+        # valley = peaks[i] + dist
+        # indexes.append(valley)
+        indexes.append(peaks[i])
 
     return indexes
 
@@ -28,9 +29,9 @@ def invert(im):
 
 
 def enhance(im):
+    # kernel = np.ones((5, 5), np.uint8)
+    # im = cv2.erode(im, kernel, iterations=1)
     kernel = np.ones((5, 5), np.uint8)
-    im = cv2.erode(im, kernel, iterations=1)
-    kernel = np.ones((15, 15), np.uint8)
     im = cv2.dilate(im, kernel, iterations=1)
 
     return im
@@ -52,5 +53,11 @@ def projection_analysis(im):
     thres_peaks_low = mean_peaks - 3*std_peaks
     peaks = peaks[np.logical_and(hist[peaks] < thres_peaks_high,
                                  hist[peaks] > thres_peaks_low)]
+
+
+    viz = im
+    for peak in peaks:
+        cv2.circle(viz,(100,peak),radius=5,color=(127,0,0),thickness=5)
+    cv2.imwrite("data/peaks.jpg",viz)
 
     return peaks

@@ -108,7 +108,7 @@ class Astar():
         m = self.M(neighbor)
         d = self.D(neighbor)
         d2 = self.D2(neighbor)
-        return 3*v+1*n+50*m+150*d+50*d2
+        return 3*v+1*n+50*m+200*d+200*d2
         # return 2.5*v+1*n+50*m+130*d+0*d2
 
     def V(self, node, start):
@@ -148,7 +148,7 @@ class Astar():
     def downward_obstacle(self, node):
         step = 1
         try:
-            while(step <= 50):
+            while(step <= 100):
                 if self.grid[node[0] + step, node[1]] == 0:
                     return float(step)
                 else:
